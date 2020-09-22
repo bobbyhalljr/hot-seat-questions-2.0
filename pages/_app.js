@@ -1,5 +1,7 @@
 import { Provider } from 'next-auth/client'
 import './styles.css'
+import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
+import theme from "../styles/theme"
 
 // Use the <Provider> to improve performance and allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
@@ -24,7 +26,12 @@ export default function App ({ Component, pageProps }) {
         keepAlive: 0
       }}
       session={pageProps.session} >
-      <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <ColorModeProvider>
+            <CSSReset />
+            <Component {...pageProps} />
+          </ColorModeProvider>
+        </ThemeProvider>
     </Provider>
   )
 }

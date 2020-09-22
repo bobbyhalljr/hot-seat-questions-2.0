@@ -6,40 +6,40 @@ import Providers from 'next-auth/providers'
 const options = {
   // https://next-auth.js.org/configuration/providers
   providers: [
-    Providers.Email({
-      server: process.env.EMAIL_SERVER, 
-      from: process.env.EMAIL_FROM,
-    }),
-    Providers.Apple({
-      clientId: process.env.APPLE_ID,
-      clientSecret: { 
-        appleId: process.env.APPLE_ID,
-        teamId: process.env.APPLE_TEAM_ID,
-        privateKey: process.env.APPLE_PRIVATE_KEY,
-        keyId: process.env.APPLE_KEY_ID,
-      }
-    }),
-    Providers.Auth0({
-      clientId: process.env.AUTH0_ID,
-      clientSecret: process.env.AUTH0_SECRET,
-      domain: process.env.AUTH0_DOMAIN
-    }),
-    Providers.Facebook({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET
-    }),
+    // Providers.Email({
+    //   server: process.env.EMAIL_SERVER, 
+    //   from: process.env.EMAIL_FROM,
+    // }),
+    // Providers.Apple({
+    //   clientId: process.env.APPLE_ID,
+    //   clientSecret: { 
+    //     appleId: process.env.APPLE_ID,
+    //     teamId: process.env.APPLE_TEAM_ID,
+    //     privateKey: process.env.APPLE_PRIVATE_KEY,
+    //     keyId: process.env.APPLE_KEY_ID,
+    //   }
+    // }),
+    // Providers.Auth0({
+    //   clientId: process.env.AUTH0_ID,
+    //   clientSecret: process.env.AUTH0_SECRET,
+    //   domain: process.env.AUTH0_DOMAIN
+    // }),
+    // Providers.Facebook({
+    //   clientId: process.env.FACEBOOK_ID,
+    //   clientSecret: process.env.FACEBOOK_SECRET
+    // }),
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
     }),
-    Providers.Google({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
-    }),
-    Providers.Twitter({
-      clientId: process.env.TWITTER_ID,
-      clientSecret: process.env.TWITTER_SECRET
-    }),
+    // Providers.Google({
+    //   clientId: process.env.GOOGLE_ID,
+    //   clientSecret: process.env.GOOGLE_SECRET
+    // }),
+    // Providers.Twitter({
+    //   clientId: process.env.TWITTER_ID,
+    //   clientSecret: process.env.TWITTER_SECRET
+    // }),
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/database
@@ -47,7 +47,7 @@ const options = {
   // Notes:
   // * You must to install an appropriate node_module for your database
   // * The Email provider requires a database (OAuth providers do not)
-  database: process.env.DATABASE_URL,
+  // database: process.env.DATABASE_URL,
 
   // The secret should be set to a reasonably long random string.
   // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
@@ -74,7 +74,7 @@ const options = {
   // https://next-auth.js.org/configuration/options#jwt
   jwt: {
     // A secret to use for key generation (you should set this explicitly)
-    // secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw', 
+    // secret: process.env.SECRET, 
     
     // Set to true to use encryption (default: false)
     // encryption: true,
@@ -103,13 +103,15 @@ const options = {
   callbacks: { 
     // signIn: async (user, account, profile) => { return Promise.resolve(true) },
     // redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
-    // session: async (session, user) => { return Promise.resolve(session) },
-    // jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token) }
+    // session: async (session, user, sessionToken) => { return Promise.resolve(session) },
+    // jwt: async (token, user, account, profile, isNewUser) => { return Promise.resolve(token, user) }
   },
 
   // Events are useful for logging
   // https://next-auth.js.org/configuration/events
-  events: { },
+  events: { 
+    // signIn: async (message) => { console.log("IT WORKS !!!! -> signin", message) },
+  },
 
   // Enable debug messages in the console if you are having problems
   debug: false,

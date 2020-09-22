@@ -5,7 +5,7 @@ export default function Layout ({children}) {
   return (
     <>
       <Header/>
-      <main>
+      <main style={{ paddingTop: '6rem' }}>
         {children}
       </main>
       <Footer/>
