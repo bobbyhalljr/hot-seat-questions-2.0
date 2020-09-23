@@ -12,7 +12,7 @@ import {
   useColorMode,
 } from '@chakra-ui/core'
 import {Main} from '../components/main'
-import { Container } from '../components/Container'
+import { Container } from '../components/container'
 import {fakeData} from '../data/fakeData'
 import Question from '../components/question'
 import {Hero} from '../components/hero'
