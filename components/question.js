@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
+import Rating from 'react-rating'
 import { Box, Heading, Text, Stack, useColorMode, Badge, Avatar, Link as ChakraLink, Icon } from '@chakra-ui/core'
+import {ImFire} from 'react-icons/Im'
 
 function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
   const { colorMode } = useColorMode()
@@ -13,12 +14,18 @@ function Question({ id, title, description, href, language, name, jobTitle,  ...
 
     return (
       <Box p={5} mx={4} my={10} shadow="lg" rounded='lg' bg={bgColor[colorMode]} color={color[colorMode]} borderWidth="4px #f1f1f1" {...rest}>
-        <Badge rounded="full"  px={2} py={1} my={4} variantColor="teal">
+        <Box display='flex' justifyContent='space-between'>
+        <Badge rounded="full"  px={2} py={2} my={4} variantColor="teal">
           {language || 'No Language specified'}
         </Badge>
-        <Heading fontSize="2xl">{title}</Heading>
-        <Text fontSize='lg' my={3}>{description}</Text>
-        <Stack isInline align='center'>
+        <Box display='flex' flexDirection='column' alignItems='center'>
+          <small>Rate this question</small>
+          <Rating style={{ margin: '.5rem 1rem 0 1rem', fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
+        </Box>
+        </Box>
+        <Heading mt={6} fontSize="2xl">{title || 'new question'}</Heading>
+        <Text fontSize='lg' fontWeight='medium' mx={2} my={4}>{description}</Text>
+        <Stack mt={6} isInline align='center'>
           <Avatar
             my={4}
             mb={6}

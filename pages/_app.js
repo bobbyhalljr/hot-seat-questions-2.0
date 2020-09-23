@@ -1,5 +1,5 @@
 import { Provider } from 'next-auth/client'
-import './styles.css'
+// import './styles.css'
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
 import theme from "../styles/theme"
 

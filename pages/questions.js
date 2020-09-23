@@ -15,6 +15,7 @@ import {Main} from '../components/main'
 import {Container} from '../components/container'
 import {fakeData} from '../data/fakeData'
 import Question from '../components/question'
+import {CallToAction} from '../components/callToAction'
 
 export default function Page () {
   return (
@@ -37,6 +38,7 @@ export default function Page () {
           {/* </Box> */}
         {/* </Box> */}
       </Main>
+      <CallToAction />
     </Container>
   )
 }
