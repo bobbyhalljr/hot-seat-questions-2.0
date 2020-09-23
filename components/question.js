@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Rating from 'react-rating'
 import { Box, Heading, Text, Stack, useColorMode, Badge, Avatar, Link as ChakraLink, Icon } from '@chakra-ui/core'
-import {ImFire} from 'react-icons/Im'
+import {ImFire} from 'react-icons/im'
 
 function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
   const { colorMode } = useColorMode()
