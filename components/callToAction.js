@@ -1,7 +1,7 @@
 import { Link as ChakraLink, useColorMode, Text } from '@chakra-ui/core'
 
-import { Container } from './Container'
-import CustomModal from './CustomModal'
+import { Container } from './container'
+import CustomModal from './customModal'
 
 export const CallToAction = () => {
   const { colorMode } = useColorMode()
