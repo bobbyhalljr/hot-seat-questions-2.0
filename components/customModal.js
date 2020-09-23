@@ -23,19 +23,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 // import {useSession} from 'next-auth'
 // import { getAllPosts } from '../pages/index'
-import {fakeData} from '../data/fakeData'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function CustomModal(props, { headerText, buttonText, inputLabel1, inputLabel2 }) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
-    const [signedIn, setSignedIn] = React.useState(false)
     const [scrollBehavior, setScrollBehavior] = React.useState("inside")
     const [question, setQuestion] = React.useState('')
     const [description, setDescription] = React.useState('')
     const [language, setLanguage] = React.useState('')
     const [session] = useSession()
-    const [fakeData, setFakeData] = React.useState([])
-
     
     // const CREATE_POST = gql`
     //   mutation createPost($question: String!, $description: String!, $language: String){
@@ -61,10 +57,6 @@ export default function CustomModal(props, { headerText, buttonText, inputLabel1
 
     const initialRef = React.useRef();
 
-    React.useEffect(() => {
-
-    },[signedIn])
-  
     return (
       <>
         <Button _hover={{ bg: 'gray.200', color: 'red.500' }} transition="all 0.4s cubic-bezier(.08,.52,.52,1)" width="90%" m={4} mb={6} rounded='full' color='white' fontSize={['1rem', 'xl']} fontWeight='semibold' bg='red.500' onClick={onOpen}>POST A QUESTION</Button>
@@ -126,7 +118,6 @@ export default function CustomModal(props, { headerText, buttonText, inputLabel1
                   //     })
                   //   }
                   // }),
-                  setFakeData(post)
                   setQuestion('')
                   setDescription('')
                   setLanguage('')
