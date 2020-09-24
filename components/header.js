@@ -2,34 +2,35 @@ import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import styles from './header.module.css'
 import { 
-    Box, 
-    Heading, 
-    Flex, 
-    Text, 
-    Button, 
-    useColorMode,  
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    Avatar,
-    DrawerCloseButton,
-    useDisclosure,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuGroup,
-    MenuDivider,
-    MenuOptionGroup,
-    MenuItemOption,
-    Link as ChakraLink,
-    Stack,
-    } from "@chakra-ui/core";
-    import DarkModeSwitch from './darkModeSwitch'
-    import theme from '../styles/theme'
+  Box, 
+  Heading, 
+  Flex, 
+  Text, 
+  Button, 
+  useColorMode,  
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  Avatar,
+  DrawerCloseButton,
+  useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuGroup,
+  MenuDivider,
+  MenuOptionGroup,
+  MenuItemOption,
+  Link as ChakraLink,
+  Stack,
+  } from "@chakra-ui/core";
+import DarkModeSwitch from './darkModeSwitch'
+import theme from '../styles/theme'
+import {AiOutlineDown} from 'react-icons/ai'
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} m={2} display='flex' justifyContent='flex-start' fontSize='xl' fontWeight='semibold' p={2}>
@@ -97,8 +98,9 @@ export default function Header (props) {
       
               {session && 
                 <Menu>
-                  <MenuButton>
+                  <MenuButton style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <Avatar name={`${session.user.name} || ${session.user.email}`} src={session.user.image} />
+                    <AiOutlineDown style={{ marginLeft: '.3rem', fontSize: '1rem'}} />
                   </MenuButton>
                   <MenuList>
                   <MenuItem as="a" href="/questions">
