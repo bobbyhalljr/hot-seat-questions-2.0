@@ -42,7 +42,7 @@ export default function Question({ id, title, description, href, language, name,
         </Badge>
         <Box display='flex' flexDirection='column' alignItems='center'>
           <small>Rate this question</small>
-          <Rating onClick={onClickRating} style={{ margin: '.5rem 1rem 0 1rem', fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
+          <Rating style={{ margin: '.5rem 1rem 0 1rem', fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
         </Box>
       </Box>
       <Heading mt={6} fontSize="2xl">{title || 'new question'}</Heading>
