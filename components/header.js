@@ -29,7 +29,7 @@ import {
     Link as ChakraLink,
     Stack,
     } from "@chakra-ui/core";
-    import { DarkModeSwitch } from './darkModeSwitch'
+    import DarkModeSwitch from './darkModeSwitch'
     import theme from '../styles/theme'
 
 const MenuItems = ({ children }) => (

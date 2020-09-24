@@ -1,9 +1,9 @@
 import { Link as ChakraLink, useColorMode, Text } from '@chakra-ui/core'
 
-import { Container } from './container'
+import Container from './container'
 import CustomModal from './customModal'
 
-export const CallToAction = () => {
+export default function CallToAction() {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}

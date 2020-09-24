@@ -4,7 +4,7 @@ import Rating from 'react-rating'
 import { Box, Heading, Text, Stack, useColorMode, Badge, Avatar, Link as ChakraLink, Icon } from '@chakra-ui/core'
 import {ImFire} from 'react-icons/im'
 
-export function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
+export default function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}

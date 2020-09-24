@@ -11,11 +11,11 @@ import {
   Heading,
   Flex
 } from '@chakra-ui/core'
-import {Main} from '../components/main'
-import {Container} from '../components/container'
+import Main from '../components/main'
+import Container from '../components/container'
 import {fakeData} from '../data/fakeData'
-import {Question} from '../components/question'
-import {CallToAction} from '../components/callToAction'
+import Question from '../components/question'
+import CallToAction from '../components/callToAction'
 
 export default function Page () {
   return (

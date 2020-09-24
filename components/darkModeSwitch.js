@@ -1,6 +1,6 @@
 import { useColorMode, Icon, Button, Box } from '@chakra-ui/core'
 
-export const DarkModeSwitch = () => {
+export default function DarkModeSwitch(){
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (

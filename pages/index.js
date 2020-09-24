@@ -11,14 +11,14 @@ import {
   Heading,
   useColorMode,
 } from '@chakra-ui/core'
-import {Main} from '../components/main'
-import { Container } from '../components/container'
+import Main from '../components/main'
+import Container from '../components/container'
 import {fakeData} from '../data/fakeData'
-import {Question} from '../components/question'
-import {Hero} from '../components/hero'
+import Question from '../components/question'
+import Hero from '../components/hero'
 import Link from 'next/link'
 
-export default function Page () {
+export default function Page() {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}
