@@ -27,7 +27,7 @@ export default function Page () {
             {fakeData.map(data => (
               <Question 
               key={data.title}
-              title={data.question}
+              title={data.title}
               description={data.description}
               language={data.language}
               name={data.name}
