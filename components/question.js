@@ -45,7 +45,7 @@ export default function Question({ id, title, description, href, language, name,
           <Rating style={{ margin: '.5rem 1rem 0 1rem', fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
         </Box>
       </Box>
-      <Heading mt={6} fontSize="2xl">{title || 'new question'}</Heading>
+      <Heading mt={6} fontSize="2xl">{title}</Heading>
       
       <Text fontSize='lg' fontWeight='medium' my={4}>{description}</Text>
       <Stack mt={6} isInline align='center'>
