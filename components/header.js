@@ -41,6 +41,7 @@ const MenuItems = ({ children }) => (
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 export default function Header (props) {
+  
   const [ session, loading ] = useSession()
 
   const [show, setShow] = React.useState(false)
