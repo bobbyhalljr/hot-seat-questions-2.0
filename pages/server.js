@@ -25,6 +25,7 @@ export default function Page () {
         The disadvantage of Server Side Rendering is that this page is slower to render.
       </p>
     </Layout>
+    
   )
 }
 
