@@ -33,6 +33,7 @@ export default function Page() {
         How it works 🚀
       </Heading>
       <List spacing={['4', '6']} fontSize={['lg', 'xl']} mx={['6', '10']}>
+        
         <ListItem>
           <ListIcon icon="check-circle" color="green.500" />
           Login with your email or github account
