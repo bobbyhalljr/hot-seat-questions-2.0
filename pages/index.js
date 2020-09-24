@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/core'
 import Main from '../components/main'
 import Container from '../components/container'
-import {fakeData} from '../data/fakeData'
+// import {fakeData} from '../data/fakeData'
 import Question from '../components/question'
 import Hero from '../components/hero'
 import Link from 'next/link'

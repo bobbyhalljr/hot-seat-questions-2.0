@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import styles from './header.module.css'
@@ -44,7 +43,7 @@ const MenuItems = ({ children }) => (
 export default function Header (props) {
   const [ session, loading ] = useSession()
 
-  const [show, setShow] = useState(false)
+  const [show, setShow] = React.useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [placement, setPlacement] = React.useState("right");
   const handlePlacementChange = event => setPlacement(event.target.value);
