@@ -24,7 +24,7 @@ export default function Question({ id, title, description, href, language, name,
         </Box>
         </Box>
         <Heading mt={6} fontSize="2xl">{title || 'new question'}</Heading>
-        <Text fontSize='lg' fontWeight='medium' mx={2} my={4}>{description}</Text>
+        <Text fontSize='lg' fontWeight='medium' my={4}>{description}</Text>
         <Stack mt={6} isInline align='center'>
           <Avatar
             my={4}
