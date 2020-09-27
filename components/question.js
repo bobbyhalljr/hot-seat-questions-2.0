@@ -73,7 +73,7 @@ export default function Question({ id, title, description, href, language, name,
       description: 'Thank you for taking the time to vote 🥳',
       status: 'success',
       position: 'top',
-      duration: 7000,
+      duration: 5000,
       isClosable: true,
     }) 
     :
@@ -84,7 +84,7 @@ export default function Question({ id, title, description, href, language, name,
       description: 'We require signing in because of spam, thank you',
       status: 'error',
       position: 'top',
-      duration: 7000,
+      duration: 5000,
       isClosable: true,
     }) 
   }
