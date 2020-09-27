@@ -3,7 +3,27 @@ import ReactDOM from 'react-dom';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Rating from 'react-rating'
-import { Box, Heading, Button, badge, Text, Stack, useColorMode, Badge, Skeleton, Avatar, Link as ChakraLink, Icon } from '@chakra-ui/core'
+import { Box, 
+  Heading, 
+  Button, 
+  badge, 
+  Text, 
+  Stack, 
+  useColorMode, 
+  Badge, 
+  Skeleton, 
+  Avatar,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+  ModalCloseButton,
+  Link as ChakraLink, 
+  Icon 
+} from '@chakra-ui/core'
 import {ImFire} from 'react-icons/im'
 import { useSession } from 'next-auth/client'
 import Toast from '../components/toast'
@@ -20,6 +40,7 @@ export default function Question({ id, title, description, href, language, name,
   const color = {light: 'gray.800', dark: 'white'}
   const [session, loading] = useSession()
   const [rating, setRating] = useState(0)
+  const { isOpen, onOpen, onClose } = useDisclosure();
   // const [emoji, setEmoji] = useState(null)
   
   const toast = useToast();
@@ -56,6 +77,7 @@ export default function Question({ id, title, description, href, language, name,
       isClosable: true,
     }) 
     :
+    // setRating(!rating)
     // user is not signed in (error)
     toast({
       title: 'Please sign in to vote',
@@ -76,9 +98,10 @@ export default function Question({ id, title, description, href, language, name,
             </Badge>
           </Box>
           <Box display='flex' flexDirection='column' mr={1}>
-            {(rating <= 1) && <small style={{ marginBottom: '.5rem' }}>Rate this question</small>}
+            {(rating < 1) && <small style={{ marginBottom: '.5rem' }}>Rate this question</small>}
             <Rating {...rating} initialRating={rating} onClick={onClickRating} style={{ fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
             {(rating > 0) && session && <small>{`you voted ${rating} out of 5`}</small>}
+            {!session && <small>Please sign in <br /> you voted 0 out of 5</small>}
           </Box>
         </Box>
       <Heading mt={6} fontSize="2xl">{title}</Heading>
