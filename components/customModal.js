@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 // import { getAllPosts } from '../pages/index'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default function CustomModal(props, { headerText, buttonText, inputLabel1, inputLabel2 }) {
+export default function CustomModal({ headerText, buttonText, inputLabel1, inputLabel2 }) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState("inside")
     const [question, setQuestion] = React.useState('')
@@ -83,8 +83,7 @@ export default function CustomModal(props, { headerText, buttonText, inputLabel1
                   <Text fontSize='2xl' fontWeight='medium' mb={6}>Sign in with GitHub</Text>
                     <Button as={'a'} className="signInButton"
                       href='/api/auth/signin'
-                      onClick={(e) => {
-                        // setSignedIn(true)
+                      onClick={() => {
                         signIn()
                       }}
                     >Sign in</Button>
@@ -126,6 +125,7 @@ export default function CustomModal(props, { headerText, buttonText, inputLabel1
                     title: "Question submitted successfully!",
                     description: "Thank you for sharing 😁",
                     status: "success",
+                    position: 'top',
                     duration: 5000,
                     isClosable: true,
                   })
