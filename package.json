@@ -8,7 +8,11 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "db": "prisma studio --experimental",
+    "db-save": "prisma migrate save --experimental",
+    "db-up": "prisma migrate up --experimental",
+    "generate": "prisma generate"
   },
   "author": "Iain Collins <me@iaincollins.com>",
   "license": "ISC",
@@ -17,6 +21,7 @@
     "@cogent-labs/react-rating-component": "^1.1.0",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
+    "@prisma/cli": "^2.7.1",
     "emoji-picker-react": "^3.2.4",
     "emotion-theming": "^10.0.27",
     "next": "^9.5.0",
