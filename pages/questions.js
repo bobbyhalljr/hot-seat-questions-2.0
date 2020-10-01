@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react'
 import {
   Link as ChakraLink,
   Text,
@@ -16,23 +17,50 @@ import Container from '../components/container'
 // import {fakeData} from '../data/fakeData'
 import Question from '../components/question'
 import CallToAction from '../components/callToAction'
+// import { PrismaClient } from '@prisma/client';
+import useSwr from 'swr'
 
-export default function Page () {
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
+export default function Page() {
+  // const [questions, setQuestions] = useState()
+  const { data, error } = useSwr('http://localhost:3000/api/questions', fetcher)
+  console.log(data)
+
+  if (error) return <div>Failed to load users</div>
+  if (!data) return <div>Loading...</div>
+
+  // async function getAllQuestions(){
+  //   await fetch('/api/questions/getAllQuestions/', {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //   // .then(res => res.json())
+  //   .then(data => console.log(data))
+  // }
+
+  // useEffect(() => {
+  //   getAllQuestions()
+  // },[])
+
   return (
     <Container>
       <Main>
         <Heading mx={4}>Questions</Heading>
         {/* <Box> */}
           {/* <Box> */}
-            {fakeData.map(data => (
+            {data.map(question => (
               <Question 
-              key={data.title}
-              title={data.title}
-              description={data.description}
-              language={data.language}
-              name={data.name}
-              jobTitle={data.jobTitle}
-              src={data.src}
+              question={question}
+              key={question.title}
+              title={question.title}
+              description={question.description}
+              language={question.language}
+              name={question.name || ''}
+              jobTitle={question.jobTitle || ''}
+              src={question.src || ''}
               />
               ))}
           {/* </Box> */}
@@ -43,7 +71,19 @@ export default function Page () {
   )
 }
 
-// export default 
+// export async function getSeverSideProps(){
+//   const prisma = new PrismaClient()
+
+//   const questions = await prisma.post.findMany({
+//     include: { user: true }
+//   }) 
+
+//   return {
+//     props: {
+//       questions,
+//     }
+//   }
+// }
 
 
 const fakeData = [

@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 // import { getAllPosts } from '../pages/index'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default function CustomModal({ headerText, buttonText, inputLabel1, inputLabel2 }) {
+export default function CustomModal({ createQuestion, headerText, buttonText, inputLabel1, inputLabel2 }) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState("inside")
     const [question, setQuestion] = React.useState('')
@@ -117,6 +117,10 @@ export default function CustomModal({ headerText, buttonText, inputLabel1, input
                   //     })
                   //   }
                   // }),
+                  fetch('http://localhost:3000/api/createQuestion', {
+                    method: 'POST',
+                    body: JSON.stringify({ ...question, ...description, ...language }),
+                  })
                   setQuestion('')
                   setDescription('')
                   setLanguage('')
@@ -175,3 +179,21 @@ export default function CustomModal({ headerText, buttonText, inputLabel1, input
       </>
     );
   }
+
+  // export async function getStaticProps(){
+  //   const prisma = new PrismaClient()
+
+  //   const createQuestion = await prisma.post.create({
+  //     data: {
+  //       title: question.title,
+  //       description: question.description,
+  //       language: question.language,
+  //     }
+  //   })
+
+  //   return {
+  //     props: {
+  //       createQuestion
+  //     }
+  //   }
+  // }

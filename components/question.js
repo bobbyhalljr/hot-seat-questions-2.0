@@ -34,7 +34,7 @@ import { useToast } from "@chakra-ui/core"
 // import Picker from 'emoji-picker-react';
 import {RiHeartAddLine} from 'react-icons/ri'
 
-export default function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
+export default function Question({ id, title, description, href, language, name, jobTitle, question,  ...rest }) {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}
@@ -104,20 +104,20 @@ export default function Question({ id, title, description, href, language, name,
             {!session && <small>Please sign in <br /> you voted 0 out of 5</small>}
           </Box>
         </Box>
-      <Heading mt={6} fontSize="2xl">{title}</Heading>
+      <Heading mt={6} fontSize="2xl">{question.title}</Heading>
       
-      <Text fontSize='lg' fontWeight='medium' my={4}>{description}</Text>
+      <Text fontSize='lg' fontWeight='medium' my={4}>{question.description}</Text>
       <Stack mt={6} isInline align='center'>
         <Avatar
           my={4}
           mb={6}
           size="md"
           name={name}
-          src={null}
+          src={question.user.image}
         />
         <Stack spacing={0.5} letterSpacing='1.6'>
-          <Text fontWeight='semibold'>{name}</Text>
-          <Text color='gray.400' fontWeight='semibold'>{jobTitle}</Text>
+          <Text fontWeight='semibold'>{question.user.name}</Text>
+          <Text color='gray.400' fontWeight='semibold'>{question.user.jobTitle}</Text>
         </Stack>
       </Stack>
       {/* <Badge p={3} m={1} rounded='full' >
@@ -142,4 +142,3 @@ export default function Question({ id, title, description, href, language, name,
     </Box>
   );
 }
-
