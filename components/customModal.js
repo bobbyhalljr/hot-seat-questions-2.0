@@ -25,10 +25,10 @@ import { useRouter } from 'next/router'
 // import { getAllPosts } from '../pages/index'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default function CustomModal({ createQuestion, headerText, buttonText, inputLabel1, inputLabel2 }) {
+export default function CustomModal({ userId, createQuestion, headerText, buttonText, inputLabel1, inputLabel2 }) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState("inside")
-    const [question, setQuestion] = React.useState('')
+    const [title, setTitle] = React.useState('')
     const [description, setDescription] = React.useState('')
     const [language, setLanguage] = React.useState('')
     const [session] = useSession()
@@ -117,11 +117,11 @@ export default function CustomModal({ createQuestion, headerText, buttonText, in
                   //     })
                   //   }
                   // }),
-                  fetch('http://localhost:3000/api/createQuestion', {
+                  fetch('http://localhost:3000/api/questions/createQuestion', {
                     method: 'POST',
-                    body: JSON.stringify({ ...question, ...description, ...language }),
+                    body: JSON.stringify({ title, description, language, user: {connect: {email: session.user.email}} }),
                   })
-                  setQuestion('')
+                  setTitle('')
                   setDescription('')
                   setLanguage('')
                   onToggle()
@@ -136,7 +136,7 @@ export default function CustomModal({ createQuestion, headerText, buttonText, in
                 }}>
                   <FormControl mt={6} isRequired>
                     <FormLabel mb={2}>Question</FormLabel>
-                    <Input onChange={e => setQuestion(e.target.value)} value={question} shadow='md' variant='outline' name='title' placeholder="How to reverse a linked list..." />
+                    <Input onChange={e => setTitle(e.target.value)} value={title} shadow='md' variant='outline' name='title' placeholder="How to reverse a linked list..." />
                   </FormControl>
 
                   <FormControl mt={6} isRequired>

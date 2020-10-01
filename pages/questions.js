@@ -66,7 +66,7 @@ export default function Page() {
           {/* </Box> */}
         {/* </Box> */}
       </Main>
-      <CallToAction />
+      <CallToAction userId={data.map(id => {return id})}/>
     </Container>
   )
 }
