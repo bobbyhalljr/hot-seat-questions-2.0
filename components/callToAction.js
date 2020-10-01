@@ -3,7 +3,7 @@ import { Link as ChakraLink, useColorMode, Text } from '@chakra-ui/core'
 import Container from './container'
 import CustomModal from './customModal'
 
-export default function CallToAction() {
+export default function CallToAction({ userId }) {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}
@@ -17,7 +17,7 @@ export default function CallToAction() {
       maxWidth="52rem"
       // py={2}
     >
-      <CustomModal width="100%" rounded='full' variant="solid" color='white' bg='red.500'>
+      <CustomModal userId={userId} width="100%" rounded='full' variant="solid" color='white' bg='red.500'>
         {/* <p> */}
           {/* Post a question */}
         {/* </p> */}
