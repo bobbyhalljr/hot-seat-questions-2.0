@@ -17,46 +17,25 @@ import {
     Select,
     useToast
 } from "@chakra-ui/core";
-import Link from 'next/link'
-// import gql from 'graphql-tag'
-// import { useMutation, useQuery } from '@apollo/client'
-import { useRouter } from 'next/router'
-// import {useSession} from 'next-auth'
-// import { getAllPosts } from '../pages/index'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/client'
+import { mutate } from 'swr'
+import fetch from '../lib/fetch'
+import useQuestions from '../lib/hooks/useQuestions'
 
-export default function CustomModal({ userId, createQuestion, headerText, buttonText, inputLabel1, inputLabel2 }) {
+export default function CustomModal({ question, headerText, buttonText, inputLabel1, inputLabel2 }) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
     const [scrollBehavior, setScrollBehavior] = React.useState("inside")
     const [title, setTitle] = React.useState('')
     const [description, setDescription] = React.useState('')
     const [language, setLanguage] = React.useState('')
+    // const [jobTitle, setJobTitle] = React.useState('')
     const [session] = useSession()
+    const { data } = useQuestions()
     
-    // const CREATE_POST = gql`
-    //   mutation createPost($question: String!, $description: String!, $language: String){
-    //     createPost(question: $question, description: $description, language: $language){
-    //       id
-    //       question
-    //       description
-    //       language
-    //       authorId
-    //       author {
-    //         name
-    //         jobTitle
-    //       }
-    //     }
-    //   }
-    // `
-
-    const router = useRouter()
     const toast = useToast()
-
-    // const [createPost, { data }] = useMutation(CREATE_POST)
-    // const { data: { posts } } = useQuery(getAllPosts)
-
     const initialRef = React.useRef();
 
+   
     return (
       <>
         <Button _hover={{ bg: 'gray.200', color: 'red.500' }} transition="all 0.4s cubic-bezier(.08,.52,.52,1)" width="90%" m={4} mb={6} rounded='full' color='white' fontSize={['1rem', 'xl']} fontWeight='semibold' bg='red.500' onClick={onOpen}>POST A QUESTION</Button>
@@ -96,31 +75,16 @@ export default function CustomModal({ userId, createQuestion, headerText, button
               <ModalBody mb={6}>
                 <Text mb={4} fontSize='xl' fontWeight='medium' my={8}>{`Hello!  , We Hope you crushed your interview!`}</Text>
                 
-                <form onSubmit={(e) => {
+                <form onSubmit={async (e) => {
                   e.preventDefault()
-                  // createPost({
-                  //   variables: {
-                  //     question: question,
-                  //     description: description,
-                  //     language: language,
-                  //   },
-                  //   refetchQueries: posts.map(id => ({
-                  //     query: getAllPosts,
-                  //     variables: { id }
-                  //   })),
-                  //   update(cache, { data: { posts } }){
-                  //     const stalePosts = cache.readQuery({ query: getAllPosts })
 
-                  //     cache.writeQuery({ 
-                  //       query: getAllPosts,
-                  //       data: { posts: [stalePosts, createPost] }
-                  //     })
-                  //   }
-                  // }),
-                  fetch('http://localhost:3000/api/questions/createQuestion', {
+                  await fetch('/api/questions/createQuestion', {
                     method: 'POST',
                     body: JSON.stringify({ title, description, language, user: {connect: {email: session.user.email}} }),
                   })
+                
+                  mutate('/api/questions', [...data])
+
                   setTitle('')
                   setDescription('')
                   setLanguage('')
@@ -134,6 +98,11 @@ export default function CustomModal({ userId, createQuestion, headerText, button
                     isClosable: true,
                   })
                 }}>
+                  {/* <FormControl mt={6} isRequired>
+                    <FormLabel mb={2}>Job Title</FormLabel>
+                    <Input onChange={e => setJobTitle(e.target.value)} value={jobTitle} shadow='md' variant='outline' name='jobTitle' placeholder="Software Engineer" />
+                  </FormControl> */}
+
                   <FormControl mt={6} isRequired>
                     <FormLabel mb={2}>Question</FormLabel>
                     <Input onChange={e => setTitle(e.target.value)} value={title} shadow='md' variant='outline' name='title' placeholder="How to reverse a linked list..." />
@@ -167,33 +136,8 @@ export default function CustomModal({ userId, createQuestion, headerText, button
               </ModalBody>
             </>
             )}
-  
-            {/* <ModalFooter>
-              <Button variantColor="blue" mr={3}>
-                Save
-              </Button>
-              <Button onClick={onClose}>Cancel</Button>
-            </ModalFooter> */}
           </ModalContent>
         </Modal>
       </>
     );
   }
-
-  // export async function getStaticProps(){
-  //   const prisma = new PrismaClient()
-
-  //   const createQuestion = await prisma.post.create({
-  //     data: {
-  //       title: question.title,
-  //       description: question.description,
-  //       language: question.language,
-  //     }
-  //   })
-
-  //   return {
-  //     props: {
-  //       createQuestion
-  //     }
-  //   }
-  // }

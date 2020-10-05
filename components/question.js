@@ -39,7 +39,7 @@ export default function Question({ id, title, description, href, language, name,
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}
   const [session, loading] = useSession()
-  const [rating, setRating] = useState(0)
+  const [rating, setRating] = useState(null)
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [emoji, setEmoji] = useState(null)
   
@@ -49,7 +49,7 @@ export default function Question({ id, title, description, href, language, name,
   // const { id } = router.query
 
   loading && (
-    <div>
+    <div key={question.user.email}>
       <Skeleton height="20px" my="10px" />
       <Skeleton height="20px" my="10px" />
       <Skeleton height="20px" my="10px" />
@@ -89,8 +89,10 @@ export default function Question({ id, title, description, href, language, name,
     }) 
   }
 
+  const date = question.createdAt.substr(0, 10)
+
   return (
-      <Box p={5} mx={4} my={10} shadow="lg" rounded='lg' bg={bgColor[colorMode]} color={color[colorMode]} borderWidth="4px #f1f1f1" {...rest}>
+      <Box key={question.user.email} p={5} mx={4} my={10} shadow="lg" rounded='lg' bg={bgColor[colorMode]} color={color[colorMode]} borderWidth="4px #f1f1f1" {...rest}>
         <Box m={1} mb={8} display='flex' justifyContent='space-between'>
           <Box>
             <Badge rounded="full" px={2} py={2} m={1} variantColor="teal">
@@ -99,7 +101,7 @@ export default function Question({ id, title, description, href, language, name,
           </Box>
           <Box display='flex' flexDirection='column' mr={1}>
             {(rating < 1) && <small style={{ marginBottom: '.5rem' }}>Rate this question</small>}
-            <Rating {...rating} initialRating={rating} onClick={onClickRating} style={{ fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
+            <Rating {...question.rating} initialRating={rating} onClick={onClickRating} style={{ fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
             {(rating > 0) && session && <small>{`you voted ${rating} out of 5`}</small>}
             {!session && <small>Please sign in <br /> you voted 0 out of 5</small>}
           </Box>
@@ -118,6 +120,7 @@ export default function Question({ id, title, description, href, language, name,
         <Stack spacing={0.5} letterSpacing='1.6'>
           <Text fontWeight='semibold'>{question.user.name}</Text>
           <Text color='gray.400' fontWeight='semibold'>{question.user.jobTitle}</Text>
+          <Text>{`Posted: ${date}`}</Text>
         </Stack>
       </Stack>
       {/* <Badge p={3} m={1} rounded='full' >
