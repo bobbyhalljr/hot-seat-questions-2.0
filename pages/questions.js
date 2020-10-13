@@ -55,6 +55,7 @@ export default function Page() {
           <Question 
           question={question}
           key={question.title}
+          rating={question.rating}
           title={question.title}
           description={question.description}
           language={question.language}
