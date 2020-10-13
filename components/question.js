@@ -73,7 +73,7 @@ export default function Question({ id, title, description, href, language, name,
   // }
 
   const updateQuestion = async () => {
-    await fetch('http://localhost:3000/api/questions/updateQuestion', {
+    await fetch('/api/questions/updateQuestion', {
       method: "POST",
       body: JSON.stringify(rating),
       // where: { id: data.id },
