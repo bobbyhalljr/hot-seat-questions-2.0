@@ -33,23 +33,27 @@ import FlameRating from '../components/fireRating'
 import { useToast } from "@chakra-ui/core"
 // import Picker from 'emoji-picker-react';
 import {RiHeartAddLine} from 'react-icons/ri'
+import { mutate } from 'swr'
+import fetch from '../lib/fetch'
+import useQuestions from '../lib/hooks/useQuestions'
 
-export default function Question({ id, title, description, href, language, name, jobTitle,  ...rest }) {
+export default function Question({ id, title, description, href, language, name, jobTitle, question, ...rest }) {
   const { colorMode } = useColorMode()
   const bgColor = {light: 'gray.100', dark: 'gray.700'}
   const color = {light: 'gray.800', dark: 'white'}
   const [session, loading] = useSession()
+  const { data } = useQuestions()
+  const toast = useToast();
   const [rating, setRating] = useState(0)
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [emoji, setEmoji] = useState(null)
   
-  const toast = useToast();
 
   // const router = useRouter()
   // const { id } = router.query
 
   loading && (
-    <div>
+    <div key={question.user.email}>
       <Skeleton height="20px" my="10px" />
       <Skeleton height="20px" my="10px" />
       <Skeleton height="20px" my="10px" />
@@ -64,8 +68,27 @@ export default function Question({ id, title, description, href, language, name,
   //   <Picker onEmojiClick={onEmojiClick}/>
   // )
 
-  const onClickRating = (value) => {
-    setRating(value)
+  // const handleRatingChange = (value) => {
+  //   setRating(value)
+  // }
+
+  const updateQuestion = async () => {
+    await fetch('http://localhost:3000/api/questions/updateQuestion', {
+      method: "POST",
+      body: JSON.stringify(rating),
+      // where: { id: data.id },
+      // data: { rating }
+    })
+    // .then(res => {
+    //   setRating(res)
+    //   console.log(res)
+    // })
+
+    mutate('/api/questions', [...data])
+  }
+
+  function onClickRating(value) {
+    // setRating(value)
     session ? 
     // user is signed in (success)
     toast({
@@ -75,9 +98,8 @@ export default function Question({ id, title, description, href, language, name,
       position: 'top',
       duration: 5000,
       isClosable: true,
-    }) 
+    })
     :
-    // setRating(!rating)
     // user is not signed in (error)
     toast({
       title: 'Please sign in to vote',
@@ -86,38 +108,44 @@ export default function Question({ id, title, description, href, language, name,
       position: 'top',
       duration: 5000,
       isClosable: true,
-    }) 
+    })
+
+    updateQuestion()
   }
 
+  const date = question.createdAt.substr(0, 10)
+
   return (
-      <Box p={5} mx={4} my={10} shadow="lg" rounded='lg' bg={bgColor[colorMode]} color={color[colorMode]} borderWidth="4px #f1f1f1" {...rest}>
+      <Box key={question.user.email} p={5} mx={4} my={10} shadow="lg" rounded='lg' bg={bgColor[colorMode]} color={color[colorMode]} borderWidth="4px #f1f1f1" {...rest}>
         <Box m={1} mb={8} display='flex' justifyContent='space-between'>
           <Box>
             <Badge rounded="full" px={2} py={2} m={1} variantColor="teal">
-              {language || 'No Language specified'}
+              {question.language || 'No Language specified'}
             </Badge>
           </Box>
-          <Box display='flex' flexDirection='column' mr={1}>
+          {/* UnComment the rating when done */}
+          {/* <Box display='flex' flexDirection='column' mr={1}>
             {(rating < 1) && <small style={{ marginBottom: '.5rem' }}>Rate this question</small>}
-            <Rating {...rating} initialRating={rating} onClick={onClickRating} style={{ fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
-            {(rating > 0) && session && <small>{`you voted ${rating} out of 5`}</small>}
-            {!session && <small>Please sign in <br /> you voted 0 out of 5</small>}
-          </Box>
+            <Rating  value={rating} initialRating={rating} onChange={rate => setRating(rate)} onClick={onClickRating} style={{ fontSize: '1.4rem' }} start={0} stop={5} emptySymbol={<ImFire />} fullSymbol={<span> 🔥 </span>}/>
+            {session && <small>{`you voted ${rating} out of 5`}</small>}
+            {!session && <small>you voted 0 out of 5</small>}
+          </Box> */}
         </Box>
-      <Heading mt={6} fontSize="2xl">{title}</Heading>
+      <Heading mt={6} fontSize="2xl">{question.title}</Heading>
       
-      <Text fontSize='lg' fontWeight='medium' my={4}>{description}</Text>
+      <Text fontSize='lg' fontWeight='medium' my={4}>{question.description}</Text>
       <Stack mt={6} isInline align='center'>
         <Avatar
           my={4}
           mb={6}
           size="md"
           name={name}
-          src={null}
+          src={question.user.image}
         />
         <Stack spacing={0.5} letterSpacing='1.6'>
-          <Text fontWeight='semibold'>{name}</Text>
-          <Text color='gray.400' fontWeight='semibold'>{jobTitle}</Text>
+          <Text fontWeight='semibold'>{question.user.name}</Text>
+          <Text color='gray.400' fontWeight='semibold'>{question.user.jobTitle}</Text>
+          <Text>{`Posted: ${date}`}</Text>
         </Stack>
       </Stack>
       {/* <Badge p={3} m={1} rounded='full' >
@@ -142,4 +170,3 @@ export default function Question({ id, title, description, href, language, name,
     </Box>
   );
 }
-
