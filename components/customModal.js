@@ -60,8 +60,8 @@ export default function CustomModal({ question, headerText, buttonText, inputLab
                 <Box textAlign='center' my={4}>
                   <Text>Before you post</Text>
                   <Text fontSize='2xl' fontWeight='medium' mb={6}>Sign in with GitHub</Text>
-                    <Button as={'a'} className="signInButton"
-                      href='/api/auth/signin'
+                    <Button  className="signInButton"
+                      // href='/api/auth/signin'
                       onClick={() => {
                         signIn()
                       }}
