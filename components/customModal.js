@@ -22,6 +22,8 @@ import { mutate } from "swr";
 import fetch from "../lib/fetch";
 import useQuestions from "../lib/hooks/useQuestions";
 
+import { supabase } from "../lib/initSupabase";
+
 export default function CustomModal({ questions }) {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const [scrollBehavior, setScrollBehavior] = React.useState("inside");
@@ -35,6 +37,13 @@ export default function CustomModal({ questions }) {
 
   const toast = useToast();
   const initialRef = React.useRef();
+
+  const signIn = async () => {
+    let { user, error } = await supabase.auth.signIn({
+      provider: "github",
+    });
+    return user, error;
+  };
 
   return (
     <>
@@ -82,6 +91,7 @@ export default function CustomModal({ questions }) {
                   onClick={() => {
                     // signIn();
                     setSignedIn(true);
+                    // signIn();
                   }}
                 >
                   Sign in

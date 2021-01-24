@@ -11,6 +11,7 @@ export default function Page() {
   // const { data, error } = useQuestions()
 
   // if (error) return <div>Failed to load users</div>
+
   if (!questions)
     return (
       <>
