@@ -10,9 +10,9 @@ const questions = [
     rating: 2,
   },
   {
-    title: "I totally bombed that interview!",
+    title: "I totally loved that interview!",
     description:
-      "At the end of the interview they wanted me to write a function to return treu if the string was a palindrone, and false otherwise...",
+      "At the end of the interview they wanted me to write a function to return true if the string was a palindrone, and false otherwise...",
     language: "Python",
     name: "Glenn Rice",
     jobTitle: "Python Engineer",
