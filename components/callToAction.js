@@ -1,13 +1,13 @@
-import { Link as ChakraLink, useColorMode, Text } from '@chakra-ui/core'
+import { Link as ChakraLink, useColorMode, Text } from "@chakra-ui/core";
 
-import Container from './container'
-import CustomModal from './customModal'
+import Container from "./container";
+import CustomModal from "./customModal";
 
-export default function CallToAction({ data }) {
-  const { colorMode } = useColorMode()
-  const bgColor = {light: 'gray.100', dark: 'gray.700'}
-  const color = {light: 'gray.800', dark: 'white'}
-  
+export default function CallToAction({ questions }) {
+  const { colorMode } = useColorMode();
+  const bgColor = { light: "gray.100", dark: "gray.700" };
+  const color = { light: "gray.800", dark: "white" };
+
   return (
     <Container
       flexDirection="row"
@@ -17,12 +17,18 @@ export default function CallToAction({ data }) {
       maxWidth="52rem"
       // py={2}
     >
-      <CustomModal data={data} width="100%" rounded='full' variant="solid" color='white' bg='red.500'>
+      <CustomModal
+        questions={questions}
+        width="100%"
+        rounded="full"
+        variant="solid"
+        color="white"
+        bg="red.500"
+      >
         {/* <p> */}
-          {/* Post a question */}
+        {/* Post a question */}
         {/* </p> */}
       </CustomModal>
-      
     </Container>
-  )
+  );
 }
